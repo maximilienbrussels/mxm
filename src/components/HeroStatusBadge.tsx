@@ -29,6 +29,7 @@ const COPY: Record<
     noTime: string;
     rain: string;
     week: string;
+    weekShort: string;
     weekTitle: string;
     weekIntro: string;
     closedDay: string;
@@ -46,6 +47,7 @@ const COPY: Record<
     noTime: "Openingsuren op aanvraag",
     rain: "neerslag",
     week: "Bekijk weekrooster",
+    weekShort: "Weekrooster",
     weekTitle: "Weekrooster",
     weekIntro: "Openingsuren van maandag tot en met zondag (Europe/Brussels).",
     closedDay: "Gesloten",
@@ -63,6 +65,7 @@ const COPY: Record<
     noTime: "Horaires sur demande",
     rain: "précipitations",
     week: "Voir l'horaire de la semaine",
+    weekShort: "Horaire",
     weekTitle: "Horaire de la semaine",
     weekIntro: "Horaires du lundi au dimanche (Europe/Bruxelles).",
     closedDay: "Fermé",
@@ -80,6 +83,7 @@ const COPY: Record<
     noTime: "Opening hours on request",
     rain: "precipitation",
     week: "View weekly schedule",
+    weekShort: "Schedule",
     weekTitle: "Weekly schedule",
     weekIntro: "Opening hours from Monday to Sunday (Europe/Brussels).",
     closedDay: "Closed",
