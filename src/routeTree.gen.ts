@@ -79,6 +79,7 @@ import { Route as WordPartnerContactRouteImport } from './routes/word-partner.co
 import { Route as AuthenticatedAdminBerichtenRouteImport } from './routes/_authenticated/admin.berichten'
 import { Route as AuthenticatedAdminProfielRouteImport } from './routes/_authenticated/admin.profiel'
 import { Route as AuthenticatedAdminScanRouteImport } from './routes/_authenticated/admin.scan'
+import { Route as AuthenticatedAdminScannerRouteImport } from './routes/_authenticated/admin.scanner'
 import { Route as AcademieSlugCertificaatRouteImport } from './routes/academie.$slug.certificaat'
 import { Route as AcademieCertificaatIdRouteImport } from './routes/academie.certificaat.$id'
 import { Route as ApiAdminCoPilotRouteImport } from './routes/api/admin/co-pilot'
@@ -492,6 +493,12 @@ const AuthenticatedAdminScanRoute = AuthenticatedAdminScanRouteImport.update({
   path: '/admin/scan',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminScannerRoute =
+  AuthenticatedAdminScannerRouteImport.update({
+    id: '/admin/scanner',
+    path: '/admin/scanner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AcademieSlugCertificaatRoute = AcademieSlugCertificaatRouteImport.update({
   id: '/academie/$slug/certificaat',
   path: '/academie/$slug/certificaat',
@@ -867,6 +874,7 @@ export interface FileRoutesByFullPath {
   '/admin/berichten': typeof AuthenticatedAdminBerichtenRoute
   '/admin/profiel': typeof AuthenticatedAdminProfielRoute
   '/admin/scan': typeof AuthenticatedAdminScanRoute
+  '/admin/scanner': typeof AuthenticatedAdminScannerRoute
   '/academie/$slug/certificaat': typeof AcademieSlugCertificaatRoute
   '/academie/certificaat/$id': typeof AcademieCertificaatIdRoute
   '/api/admin/co-pilot': typeof ApiAdminCoPilotRouteWithChildren
@@ -995,6 +1003,7 @@ export interface FileRoutesByTo {
   '/admin/berichten': typeof AuthenticatedAdminBerichtenRoute
   '/admin/profiel': typeof AuthenticatedAdminProfielRoute
   '/admin/scan': typeof AuthenticatedAdminScanRoute
+  '/admin/scanner': typeof AuthenticatedAdminScannerRoute
   '/academie/$slug/certificaat': typeof AcademieSlugCertificaatRoute
   '/academie/certificaat/$id': typeof AcademieCertificaatIdRoute
   '/api/admin/co-pilot': typeof ApiAdminCoPilotRouteWithChildren
@@ -1127,6 +1136,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/berichten': typeof AuthenticatedAdminBerichtenRoute
   '/_authenticated/admin/profiel': typeof AuthenticatedAdminProfielRoute
   '/_authenticated/admin/scan': typeof AuthenticatedAdminScanRoute
+  '/_authenticated/admin/scanner': typeof AuthenticatedAdminScannerRoute
   '/academie/$slug/certificaat': typeof AcademieSlugCertificaatRoute
   '/academie/certificaat/$id': typeof AcademieCertificaatIdRoute
   '/api/admin/co-pilot': typeof ApiAdminCoPilotRouteWithChildren
@@ -1259,6 +1269,7 @@ export interface FileRouteTypes {
     | '/admin/berichten'
     | '/admin/profiel'
     | '/admin/scan'
+    | '/admin/scanner'
     | '/academie/$slug/certificaat'
     | '/academie/certificaat/$id'
     | '/api/admin/co-pilot'
@@ -1387,6 +1398,7 @@ export interface FileRouteTypes {
     | '/admin/berichten'
     | '/admin/profiel'
     | '/admin/scan'
+    | '/admin/scanner'
     | '/academie/$slug/certificaat'
     | '/academie/certificaat/$id'
     | '/api/admin/co-pilot'
@@ -1518,6 +1530,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/berichten'
     | '/_authenticated/admin/profiel'
     | '/_authenticated/admin/scan'
+    | '/_authenticated/admin/scanner'
     | '/academie/$slug/certificaat'
     | '/academie/certificaat/$id'
     | '/api/admin/co-pilot'
@@ -2185,6 +2198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminScanRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/scanner': {
+      id: '/_authenticated/admin/scanner'
+      path: '/admin/scanner'
+      fullPath: '/admin/scanner'
+      preLoaderRoute: typeof AuthenticatedAdminScannerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/academie/$slug/certificaat': {
       id: '/academie/$slug/certificaat'
       path: '/academie/$slug/certificaat'
@@ -2611,6 +2631,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminBerichtenRoute: typeof AuthenticatedAdminBerichtenRoute
   AuthenticatedAdminProfielRoute: typeof AuthenticatedAdminProfielRoute
   AuthenticatedAdminScanRoute: typeof AuthenticatedAdminScanRoute
+  AuthenticatedAdminScannerRoute: typeof AuthenticatedAdminScannerRoute
   AuthenticatedPortaalLangSlugRoute: typeof AuthenticatedPortaalLangSlugRoute
 }
 
@@ -2624,6 +2645,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminBerichtenRoute: AuthenticatedAdminBerichtenRoute,
   AuthenticatedAdminProfielRoute: AuthenticatedAdminProfielRoute,
   AuthenticatedAdminScanRoute: AuthenticatedAdminScanRoute,
+  AuthenticatedAdminScannerRoute: AuthenticatedAdminScannerRoute,
   AuthenticatedPortaalLangSlugRoute: AuthenticatedPortaalLangSlugRoute,
 }
 
