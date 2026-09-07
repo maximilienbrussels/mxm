@@ -34,6 +34,7 @@ function ScanPage() {
   const [state, setState] = useState<RedeemResult | { ok: "loading" } | { ok: "error"; message: string } | null>(
     null,
   );
+  const [cameraOpen, setCameraOpen] = useState(false);
   const started = useRef<string | null>(null);
 
   useEffect(() => {
@@ -57,11 +58,23 @@ function ScanPage() {
       </header>
 
       {!orderId || !token ? (
-        <div className="rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground">
-          Scan de QR-code op de afhaalpas van de klant met de camera van dit toestel. De code opent
-          deze pagina en registreert de afhaling automatisch.
+        <div className="space-y-4 rounded-2xl border border-border bg-card p-5">
+          <p className="text-sm text-muted-foreground">
+            Start de camera en richt op de QR-code van de klant of op een certificaat. Werkt de
+            camera niet? Dan kan je in het scanvenster de code van 6 tekens intikken.
+          </p>
+          <button
+            type="button"
+            onClick={() => setCameraOpen(true)}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
+          >
+            <Camera className="size-5" /> Camera starten
+          </button>
         </div>
       ) : null}
+
+      {cameraOpen ? <PickupScanner onClose={() => setCameraOpen(false)} /> : null}
+
 
       {state && state.ok === "loading" && (
         <p className="flex items-center gap-2 text-sm text-muted-foreground">
