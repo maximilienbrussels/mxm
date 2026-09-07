@@ -1141,7 +1141,7 @@ export function AIChatDrawer(props: Props = {}) {
         title={draggable ? c.move : undefined}
         aria-label={t("chat.open")}
         className={
-          "group fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 inline-flex transform-gpu touch-none [will-change:transform] items-center gap-3 rounded-full bg-[color:var(--color-terracotta)] px-5 py-3 text-sm font-semibold text-white shadow-[0_20px_50px_-15px_rgba(196,101,74,0.65)] ring-1 ring-white/30 transition-all hover:-translate-y-0.5 hover:shadow-[0_25px_60px_-15px_rgba(196,101,74,0.85)] sm:right-6 sm:bottom-6 " +
+          "group fixed right-4 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-[60] inline-flex transform-gpu touch-none [will-change:transform] items-center gap-3 rounded-full bg-[color:var(--color-terracotta)] px-4 py-3 text-sm font-semibold text-white shadow-[0_20px_50px_-15px_rgba(196,101,74,0.65)] ring-1 ring-white/30 transition-all hover:-translate-y-0.5 hover:shadow-[0_25px_60px_-15px_rgba(196,101,74,0.85)] sm:right-6 sm:bottom-6 sm:px-5 " +
           (launcherDrag.dragging ? "cursor-grabbing" : draggable ? "cursor-grab" : "")
         }
       >
