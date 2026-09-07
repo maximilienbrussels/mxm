@@ -107,6 +107,16 @@ export function ImagePickerModal({
         <div className="min-h-0 flex-1 overflow-y-auto pr-1">
           {query.isLoading ? (
             <p className="text-sm text-muted-foreground">Laden…</p>
+          ) : query.isError ? (
+            <div className="rounded-lg border border-destructive/40 bg-destructive/5 p-4 text-sm">
+              <p className="font-medium text-destructive">De mediabibliotheek kon niet geladen worden.</p>
+              <p className="mt-1 text-muted-foreground">
+                {query.error instanceof Error ? query.error.message : "Onbekende fout"}
+              </p>
+              <Button type="button" size="sm" variant="outline" className="mt-3" onClick={() => void query.refetch()}>
+                Opnieuw proberen
+              </Button>
+            </div>
           ) : filter.filtered.length === 0 ? (
             <div className="grid place-items-center rounded-lg border border-dashed border-border p-10 text-center">
               <ImageOff className="size-7 text-muted-foreground" />

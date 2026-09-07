@@ -287,11 +287,6 @@ export const saveStaffMember = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => staffInput.parse(d))
   .handler(async ({ data, context }) => {
     await requirePermission(context, "manage_team");
-    const { data: isAdmin, error: roleError } = await context.supabase.rpc("is_active_admin", {
-      _user_id: context.userId,
-    });
-    if (roleError) throw new Error(roleError.message);
-    if (!isAdmin) throw new Error("Forbidden");
     if (data.id === context.userId && data.role !== "admin") {
       throw new Error("Je kan je eigen beheerdersrol niet verwijderen.");
     }
@@ -328,11 +323,6 @@ export const inviteStaffMember = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     await requirePermission(context, "manage_team");
-    const { data: isAdmin, error: roleError } = await context.supabase.rpc("is_active_admin", {
-      _user_id: context.userId,
-    });
-    if (roleError) throw new Error(roleError.message);
-    if (!isAdmin) throw new Error("Forbidden");
 
     const { dbAdmin } = await import("@/lib/db-admin.server");
     const { inviteUser } = await import("./neon-auth-admin.server");
