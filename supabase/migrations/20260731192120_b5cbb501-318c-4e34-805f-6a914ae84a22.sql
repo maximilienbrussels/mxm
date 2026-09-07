@@ -1,1 +1,0 @@
-GRANT REFERENCES, SELECT ON auth.users TO importer_tmp;
