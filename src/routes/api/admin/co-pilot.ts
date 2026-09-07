@@ -20,24 +20,10 @@ Voer nooit een actie uit zonder dat de gevraagde informatie duidelijk is; vraag 
 Antwoord altijd kort en in het Nederlands, Frans of Engels naargelang de taal van de beheerder.`;
 
 async function requireAdmin(request: Request) {
-  const header = request.headers.get("authorization");
-  if (!header?.startsWith("Bearer ")) throw new Response("Unauthorized", { status: 401 });
-  const token = header.slice(7).trim();
-  const { verifyAuthToken, dataApiClient } = await import("@/lib/neon-data.server");
-  const { requirePermission } = await import("@/lib/portal-permissions");
-  let claims: { sub: string; email?: string };
-  try {
-    claims = (await verifyAuthToken(token)) as never;
-  } catch {
-    throw new Response("Unauthorized", { status: 401 });
-  }
-  const context = { supabase: dataApiClient(token), userId: String(claims.sub), claims };
-  try {
-    await requirePermission(context, "manage_settings");
-  } catch {
-    throw new Response("Forbidden", { status: 403 });
-  }
-  return { email: (claims.email as string | undefined) ?? null };
+  const { guardApiRoute } = await import("@/lib/route-permission.server");
+  const guard = await guardApiRoute(request, "manage_settings");
+  if ("response" in guard) throw guard.response;
+  return { email: guard.auth.email };
 }
 
 export const Route = createFileRoute("/api/admin/co-pilot")({
