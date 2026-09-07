@@ -24,27 +24,8 @@ async function resolveEmail(context: { userId: string; claims: unknown }): Promi
 
 /** Enkel gebruikers met 'manage_settings' mogen API-sleutels beheren. */
 async function assertManageSettings(context: { userId: string; claims: unknown }) {
-  const { isSuperAdminEmail } = await import("@/lib/superadmin");
-  const { db } = await import("@/lib/neon.server");
-  const email = await resolveEmail(context);
-  if (isSuperAdminEmail(email)) return;
-
-  const sql = db();
-  const roleRows = (await sql`
-    select role::text as role from user_roles where user_id = ${context.userId}::uuid
-  `) as Array<{ role: string }>;
-  const roles = roleRows.map((r) => r.role);
-  if (roles.includes("owner") || roles.includes("super_admin")) return;
-
-  if (roles.length > 0) {
-    const rows = (await sql`
-      select 1 from role_permissions
-      where allowed and permission = 'manage_settings' and role::text = any(${roles})
-      limit 1
-    `) as unknown[];
-    if (rows.length > 0) return;
-  }
-  throw new Error("Forbidden: onvoldoende rechten.");
+  const { assertPermission } = await import("@/lib/permission-core.server");
+  await assertPermission(context, "manage_settings");
 }
 
 export const SCOPE_GROUPS = [

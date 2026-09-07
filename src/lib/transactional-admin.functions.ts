@@ -21,20 +21,11 @@ export type TransactionalLog = {
   sent_at: string | null;
 };
 
-async function assertAdmin(context: {
-  supabase: {
-    rpc: (
-      fn: string,
-      args: Record<string, unknown>,
-    ) => Promise<{ data: unknown; error: { message: string } | null }>;
-  };
-  userId: string;
-}) {
-  const { data, error } = await context.supabase.rpc("is_active_admin", {
-    _user_id: context.userId,
-  });
-  if (error) throw new Error(error.message);
-  if (!data) throw new Error("Enkel beheerders kunnen het maillogboek bekijken.");
+async function assertAdmin(context: { userId: string; claims?: unknown }) {
+  const { hasPermission } = await import("@/lib/permission-core.server");
+  if (!(await hasPermission(context, "manage_rights"))) {
+    throw new Error("Enkel beheerders kunnen het maillogboek bekijken.");
+  }
 }
 
 export const fetchTransactionalLogs = createServerFn({ method: "GET" })
