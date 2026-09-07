@@ -1,1 +1,0 @@
-COMMENT ON SCHEMA public IS 'Fishriii Hub application schema';
