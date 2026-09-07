@@ -12,6 +12,37 @@ import { RoutBadge } from "./RoutBadge";
 const PHONE = "+32 2 201 56 09";
 
 const LINK = "hover:text-[color:var(--color-terracotta)]";
+
+/**
+ * Toont het e-mailadres leesbaar, maar zonder kant-en-klare mailto in de
+ * broncode: de koppeling wordt pas bij klik/aanraking samengesteld.
+ */
+function ObfuscatedEmail({ email, className }: { email: string; className?: string }) {
+  const at = email.lastIndexOf("@");
+  const user = at > 0 ? email.slice(0, at) : email;
+  const domain = at > 0 ? email.slice(at + 1) : "";
+  const build = (el: HTMLAnchorElement) => {
+    if (domain) el.setAttribute("href", `mailto:${user}\u0040${domain}`);
+  };
+  return (
+    <a
+      href="#contact"
+      className={className}
+      data-user={user}
+      data-domain={domain}
+      onMouseEnter={(e) => build(e.currentTarget)}
+      onFocus={(e) => build(e.currentTarget)}
+      onTouchStart={(e) => build(e.currentTarget)}
+      onClick={(e) => build(e.currentTarget)}
+    >
+      {user}
+      <span aria-hidden="true">&#64;</span>
+      <span className="sr-only">@</span>
+      {domain}
+    </a>
+  );
+}
+
 const DISCOVER_TITLE: Record<Lang, string> = { nl: "Ontdekken", fr: "Découvrir", en: "Discover" };
 const BOOK_TITLE: Record<Lang, string> = {
   nl: "Boeken & huren",
