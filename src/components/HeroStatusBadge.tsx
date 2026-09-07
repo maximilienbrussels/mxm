@@ -189,8 +189,13 @@ export function HeroStatusBadge({ hours }: { hours: HoursDTO[] }) {
 
   return (
     <>
-      <div className="flex w-auto min-w-[240px] flex-col gap-1 rounded-2xl border border-white/20 bg-black/70 px-5 py-3 shadow-lg backdrop-blur-md">
-        <div className="flex items-center gap-2 whitespace-nowrap">
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label={c.week}
+        className="flex w-full max-w-full min-w-0 flex-col gap-1 rounded-2xl border border-white/20 bg-black/70 px-4 py-3 text-left shadow-lg backdrop-blur-md transition-colors hover:bg-black/80 sm:w-auto sm:min-w-[240px] sm:px-5"
+      >
+        <div className="flex min-w-0 items-center gap-2">
           <span
             aria-hidden
             className={
@@ -198,37 +203,39 @@ export function HeroStatusBadge({ hours }: { hours: HoursDTO[] }) {
               (isOpen ? "animate-pulse bg-emerald-400" : "animate-pulse bg-red-400")
             }
           />
-          <span className="text-sm font-extrabold uppercase tracking-wide text-white">
+          <span className="shrink-0 text-sm font-extrabold uppercase tracking-wide text-white">
             {isOpen ? c.openNow : c.closed}
           </span>
-          <span className="ml-auto text-sm font-semibold text-white/90">{subtext}</span>
+          <span className="ml-auto min-w-0 truncate text-right text-xs font-semibold text-white/90 sm:text-sm">
+            {subtext}
+          </span>
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 whitespace-nowrap text-xs text-white/90">
+        <div className="flex min-w-0 items-center gap-x-3 gap-y-1 text-xs text-white/90">
           {weather && (
-            <span className="inline-flex items-center gap-1.5">
+            <span className="inline-flex min-w-0 shrink items-center gap-1.5 whitespace-nowrap">
               <span aria-hidden>{weather.icon}</span>
               <span className="font-medium">{weather.temperature}°C</span>
               {weather.rainChance != null && (
                 <>
                   <span aria-hidden>·</span>
                   <span aria-hidden>💧</span>
-                  <span>
+                  <span className="truncate">
                     {weather.rainChance}% {c.rain}
                   </span>
                 </>
               )}
             </span>
           )}
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="ml-auto inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white"
-          >
-            <span aria-hidden>📅</span> {c.week} <span aria-hidden>→</span>
-          </button>
+          <span className="ml-auto inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold text-white/90">
+            <span aria-hidden>📅</span>
+            <span className="sm:hidden">{c.weekShort}</span>
+            <span className="hidden sm:inline">{c.week}</span>
+            <span aria-hidden>→</span>
+          </span>
         </div>
-      </div>
+      </button>
+
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-md">
