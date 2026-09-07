@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { CheckCircle2, Loader2, ScanLine, TriangleAlert } from "lucide-react";
+import { Camera, CheckCircle2, Loader2, ScanLine, TriangleAlert } from "lucide-react";
 import { z } from "zod";
+import { PickupScanner } from "@/components/portal/PickupScanner";
 import { redeemPickupQr, type RedeemResult } from "@/lib/orders/pickup.functions";
+
 
 const searchSchema = z.object({
   orderId: z.string().optional(),
