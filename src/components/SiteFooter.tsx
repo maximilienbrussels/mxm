@@ -36,8 +36,8 @@ function ObfuscatedEmail({ email, className }: { email: string; className?: stri
       onClick={(e) => build(e.currentTarget)}
     >
       {user}
-      <span aria-hidden="true">&#64;</span>
-      <span className="sr-only">@</span>
+      <span>&#64;</span>
+
       {domain}
     </a>
   );
