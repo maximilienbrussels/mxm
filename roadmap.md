@@ -33,3 +33,9 @@
 - [ ] Veilige e-mailwijziging met bevestigingslink via Brevo
 - [ ] Ontbrekende API-sleutels/secrets opvragen bij de gebruiker
 - [ ] Architectuur: intern UUID als enige sleutel, koppeltabel user_identities met subject-id per provider (incl. passkeys), e-mail als gewoon profielveld
+
+## Mobiele polish + audit (deze sessie)
+- [x] Statuswidget mobiel: korte tekst "Weekrooster →", geen tekstafbreking, hele widget klikbaar
+- [x] Zwevende Maxim-knop: meer ruimte onderaan/rechts + veilige zone, ligt boven paginablokken
+- [x] Code-audit beheerportaal: CRUD (diensten, prijzen, producten, slots, zalen), orderstatussen, rechtencontrole per beheerfunctie, mobiele tabellen/kaarten — geen blauwe stijlen gevonden
+- [ ] Live functionele test van het beheerportaal (echt opslaan in de databank) — wacht op DATABASE_URL in deze omgeving
