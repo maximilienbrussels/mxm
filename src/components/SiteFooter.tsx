@@ -154,18 +154,19 @@ export function SiteFooter() {
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground">
                 {t("footer.contact")}
               </p>
-              <p className="mt-3 break-words text-sm text-foreground/90">
-                <a href={`mailto:${contactEmail}`} className={LINK}>
-                  {contactEmail}
-                </a>
-                <br />
-                <a href={`tel:${phoneHref}`} className={LINK}>
-                  {phoneDisplay}
-                </a>
-                <br />
-                <span className="text-foreground/90">{addressLine}</span>
-              </p>
-              <nav className="mt-3 flex flex-col gap-2 text-sm text-foreground/90">
+              <ul className="mt-3 space-y-1.5 text-sm text-foreground/90">
+                <li className="break-words">
+                  <ObfuscatedEmail email={contactEmail} className={LINK} />
+                </li>
+                <li>
+                  <a href={`tel:${phoneHref}`} className={LINK}>
+                    {phoneDisplay}
+                  </a>
+                </li>
+                <li className="break-words">{addressLine}</li>
+              </ul>
+              <nav className="mt-5 flex flex-col gap-2 text-sm text-foreground/90">
+
                 <LocalLink to={pathFor("contact", lang)} className={LINK}>
                   {t("footer.contactLink")}
                 </LocalLink>
